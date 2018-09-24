@@ -1,0 +1,32 @@
+{
+  "name": "sjpe_server",
+  "version": "1.0.0",
+  "description": "Servidor web para la implementacion del backend de la aplicacion de la SJPE",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
+    "build": "babel src -s -D -d dist --presets es2015,stage-0",
+    "start": "node dist",
+    "prestart": "npm run -s build",
+    "test": "standard --fix && standard"
+  },
+  "author": "Roel Mendoza",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "^6.0.0",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "helmet": "^3.10.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "nodemon": "^1.14.11"
+  }
+}
