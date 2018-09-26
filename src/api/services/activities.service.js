@@ -15,13 +15,19 @@ export class ActivitiesService {
     })
     let docRef = await result.get()
     let someDate = new Date(docRef.data().date)
-    console.log(new Date.toString())
-    return response.status(200).send()
+    console.log(someDate.toString())
+    return result
   }
 
   async getActivityByUid(request, response) {
     let { uid } = request.params
     let docRef = await collection.doc(uid).get()
-    return response.status(200).send(new Date(docRef.data().date).toDateString())
+    return docRef.data()
+  }
+
+  async deleteActivityByUid(request,response){
+    let { uid } = request.params
+    let result = await collection.doc(uid).delete()
+    return result
   }
 }

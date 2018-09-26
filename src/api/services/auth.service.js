@@ -22,7 +22,7 @@ export class AuthService {
       createdDate: Date.now()
     })
     
-    return response.status(200).send(result)
+    return result
   }
 
   async updateUser(request, response) {
@@ -38,13 +38,13 @@ export class AuthService {
       nickname: result.displayName,
       passwordHash: result.passwordHash
     })
-    return response.status(200).send(result)
+    return result
   }
 
   async deleteUser(request, response) {
     let user = await auth.getUserByEmail(request.body.email)
     let result = await auth.deleteUser(user.uid)
     collection.doc(user.uid).delete()
-    return response.status(200).send(result)
+    return result
   }
 }
