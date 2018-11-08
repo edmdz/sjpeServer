@@ -5,23 +5,23 @@ const collection = database.collection('users')
 
 export class AuthService {
   async createUser(request, response) {
-    let {email, phone, verified, password, isEnable, nickname} =  request.body
-    let result = await auth.createUser({
+    let {email, phone, verified, password, disabled, nickname} =  request.body
+    let user = await auth.createUser({
       email: email,
       phoneNumber: phone,
       emailVerified: verified,
       password: password,
       displayName: nickname,
-      disabled: isEnable
+      disabled
     })
 
-    collection.doc(result.uid).set({
-      email: result.email,
-      nickname: result.displayName,
-      passwordHash: result.passwordHash,
+    let result = await collection.doc(result.uid).set({
+      email: user.email,
+      nickname: user.displayName,
+      passwordHash: user.passwordHash,
       createdDate: Date.now()
-    })
-    
+    }).then(res => console.log(res)).catch(err => console.log(err))
+
     return result
   }
 
